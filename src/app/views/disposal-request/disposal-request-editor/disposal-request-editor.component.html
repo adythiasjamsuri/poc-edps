@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
-    <div class="card">
-      <!-- <div class="card-header">
+  <div class="card">
+    <!-- <div class="card-header">
         <div class="row">
           <div class="col">
             Requestor: 12345 - John Mayer
@@ -10,108 +10,128 @@
           </div>
         </div>
       </div> -->
-      <div class="card-body">
-        <tabset>
-          <tab heading="Requestor Information">
-            <div class="row">
-              <div class="col-4">
-                <div class="form-group">
-                  <label>Project / Item Title</label>
-                  <input type="text"
-                         class="form-control" />
-                </div>
-  
-                <div class="form-group">
-                  <label>Cost Center</label>
-                  <!-- <ng-select [allowClear]="true"
-                             [items]="items"
-                             (selected)="selected($event)"
-                             (removed)="removed($event)"
-                             placeholder="Select Cost Center">
-                  </ng-select> -->
-                </div>
-  
-                <div class="form-group">
-                  <label>Department</label>
-                  <input type="text"
-                         class="form-control"
-                         readonly="readonly" />
-                </div>
+    <div class="card-body">
+      <tabset #stepTabs>
+        <tab heading="Requestor Information"
+             (select)="selectActiveTab(1)">
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label>Project / Item Title</label>
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="data.title" />
               </div>
-  
-              <div class="col-4">
-                <div class="form-group">
-                  <label>Disposed Item Category</label>
-                  <!-- <ng-select [allowClear]="true"
-                             [items]="items"
-                             placeholder="Select Disposal Item Category">
-                  </ng-select> -->
-                </div>
-  
-                <div class="form-group">
-                  <label>Proposed Disposal</label>
-                  <!-- <ng-select [allowClear]="true"
-                             [items]="items"
-                             placeholder="Select Proposed Disposal">
-                  </ng-select> -->
-                </div>
-  
-                <div class="form-group">
-                  <label>Disposal Area</label>
-                  <!-- <ng-select [allowClear]="true"
-                             [items]="items"
-                             placeholder="Select Disposal Area">
-                  </ng-select> -->
-                </div>
-  
-                <div class="form-group">
-                  <label>Disposal Reason</label>
-                  <textarea class="form-control"></textarea>
-                </div>
+
+              <div class="form-group">
+                <label>Cost Center</label>
+                <ng-select [items]="costCenters"
+                           bindLabel="name"
+                           placeholder="Select Cost Center"
+                           [(ngModel)]="selectedCostCenter">
+                </ng-select>
               </div>
-  
-              <div class="col-4">
-                <div class="form-group">
-                  <label>Request Type</label>
-                  <br />
-                  <label>
-                    <input type="radio"
-                           name="requestType"> Blanket
-                  </label>
-                  <br />
-                  <label>
-                    <input type="radio"
-                           name="requestType"> Non-Blanket
-                  </label>
-                </div>
-  
-                <div class="form-group">
-                  <label>Period</label>
-                  <input type="text"
-                         class="form-control"
-                         bsDaterangepicker />
-                </div>
-  
-                <div class="form-group">
-                  <label>SIRS Form</label>
-                  <input type="file"
-                         class="form-control">
-                </div>
+
+              <div class="form-group">
+                <label>Department</label>
+                <input type="text"
+                       class="form-control"
+                       readonly="readonly"
+                       placeholder="Based On Selected Cost Center"
+                       [value]="selectedCostCenter?.departmentName" />
               </div>
             </div>
-          </tab>
-          <tab heading="Item Information & Details">
-            <div class="row">
-              <div class="col-12 text-right mb-2">
-                <button type="button"
-                        class="btn btn-success"><i class="icon-cloud-upload"></i> Upload Items</button>
-                <button type="button"
-                        class="btn btn-primary"><i class="icon-plus"></i> Add Item</button>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label>Disposed Item Category</label>
+                <ng-select [items]="disposedItemCategories"
+                           bindValue="name"
+                           bindLabel="name"
+                           placeholder="Select Category"
+                           [(ngModel)]="data.disposedItemCategory">
+                </ng-select>
+              </div>
+
+              <div class="form-group">
+                <label>Proposed Disposal</label>
+                <ng-select [items]="proposedDisposals"
+                           bindValue="name"
+                           bindLabel="name"
+                           placeholder="Select Proposed Disposal"
+                           [(ngModel)]="data.proposedDisposal">
+                </ng-select>
+              </div>
+
+              <div class="form-group">
+                <label>Disposal Area</label>
+                <ng-select [items]="disposalAreas"
+                           bindValue="name"
+                           bindLabel="name"
+                           placeholder="Select Area"
+                           [(ngModel)]="data.disposalArea">
+                </ng-select>
+              </div>
+
+              <div class="form-group">
+                <label>Disposal Reason</label>
+                <textarea class="form-control"
+                          [(ngModel)]="data.disposalReason"></textarea>
               </div>
             </div>
-  
-            <table class="table table-bordered">
-              <thead class="thead-light">
+
+            <div class="col-4">
+              <div class="form-group">
+                <label>Request Type</label>
+                <br />
+                <label>
+                  <input type="radio"
+                         name="requestType"
+                         [(ngModel)]="data.requestType"
+                         [value]="'Blanket'"> Blanket
+                </label>
+                <br />
+                <label>
+                  <input type="radio"
+                         name="requestType"
+                         [(ngModel)]="data.requestType"
+                         [value]="'Non-Blanket'"> Non-Blanket
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>Period</label>
+                <input type="text"
+                       class="form-control"
+                       bsDaterangepicker
+                       [(ngModel)]="period" />
+              </div>
+
+              <div class="form-group">
+                <label>SIRS Form</label>
+                <input type="file"
+                       class="form-control"
+                       [(ngModel)]="data.sirsForm">
+              </div>
+            </div>
+          </div>
+        </tab>
+        <tab heading="Item Information & Details"
+             (select)="selectActiveTab(2)">
+          <div class="row">
+            <div class="col-12 text-right mb-2">
+              <button type="button"
+                      class="btn btn-success"><i class="icon-cloud-upload"></i> Upload Items</button>
+              <button type="button"
+                      (click)="addItem()"
+                      class="btn btn-primary"><i class="icon-plus"></i> Add Item</button>
+            </div>
+          </div>
+
+          <table class="table table-bordered"
+                 *ngIf="data.items?.length > 0">
+            <thead class="thead-light">
+              <tr>
                 <th>&nbsp;</th>
                 <th class="text-center">No.</th>
                 <th class="text-center">Item</th>
@@ -126,147 +146,184 @@
                 <th class="text-center">SP</th>
                 <th class="text-center">DC</th>
                 <th class="text-center">Gain/Loss</th>
-              </thead>
-  
-              <tbody>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of data.items; let i = index">
                 <td class="text-center"
-                    style="width: 100px;">
+                    style="width: 50px;">
                   <button type="button"
-                          class="btn btn-warning btn-sm">
-                    <i class="icon-pencil"></i>
-                  </button>
-                  <button type="button"
-                          class="btn btn-danger btn-sm">
+                          class="btn btn-danger btn-sm"
+                          (click)="removeItem(i)">
                     <i class="icon-trash"></i>
                   </button>
                 </td>
-                <td class="text-center">1</td>
+                <td class="text-center">{{ i + 1 }}</td>
                 <td>
-                  <b>5006435-0</b><br />
+                  <!-- <b>5006435-0</b><br />
                   <p class="text-muted">
                     AC NATIONAL SPLIT 3/4PK TYPE CS-C96KJ
-                  </p>
+                  </p> -->
+
+                  <ng-select [items]="products"
+                             bindLabel="name"
+                             placeholder="Select Product"
+                             [(ngModel)]="item.selectedProduct"
+                             (change)="onChange($event, item)">
+                  </ng-select>
                 </td>
-                <td class="text-center">Tuban</td>
+                <td class="text-center">{{ item.location }}</td>
                 <td class="text-center">IDR</td>
                 <td class="text-right">14,020.00</td>
-                <td class="text-center">1</td>
-                <td class="text-center">Pcs</td>
-                <td class="text-right">300,000.00</td>
-                <td class="text-right">-300,000.00</td>
-                <td class="text-right">0.00</td>
-                <td class="text-right">0.00</td>
-                <td class="text-right">0.00</td>
-                <td class="text-right">0.00</td>
-              </tbody>
-  
-              <tfoot class="thead-light">
-                <tr>
-                  <th colspan="6"
-                      class="text-right">
-                    Total
-                  </th>
-                  <th class="text-center">2</th>
-                  <th colspan="3"></th>
-                  <th class="text-right">0.00</th>
-                  <th class="text-right">0.00</th>
-                  <th class="text-right">0.00</th>
-                  <th>&nbsp;</th>
-                </tr>
-  
-                <tr>
-                  <th colspan="6"
-                      class="text-right">
-                    Total USD
-                  </th>
-                  <th colspan="4"></th>
-  
-                  <th class="text-right">0.00</th>
-                  <th class="text-right">0.00</th>
-  
-                  <th colspan="2">&nbsp;</th>
-  
-                </tr>
-              </tfoot>
-            </table>
-          </tab>
-          <tab heading="Attachment">
-            <div class="row">
-              <div class="col-12 text-right mb-2">
-                <button type="button"
-                        class="btn btn-primary"><i class="icon-plus"></i> Add Attachment</button>
-              </div>
+                <td class="text-center">
+                  <input type="number"
+                         class="form-control mx-auto text-center"
+                         [(ngModel)]="item.quantity"
+                         style="width: 70px;">
+                </td>
+                <td class="text-center">{{ item.uom }}</td>
+                <td class="text-right">{{ item.oc | number }}</td>
+                <td class="text-right">{{ item.ad | number }}</td>
+                <td class="text-right">{{ item.nbv | number }}</td>
+                <td class="text-right">{{ item.sp | number }}</td>
+                <td class="text-right">{{ item.dc | number }}</td>
+                <td class="text-right">{{ item.gainLoss | number }}</td>
+              </tr>
+
+            </tbody>
+
+            <tfoot class="thead-light">
+              <tr>
+                <th colspan="6"
+                    class="text-right">
+                  Total
+                </th>
+                <th class="text-center">{{ getTotalQuantity() }}</th>
+                <th colspan="3"></th>
+                <th class="text-right">0.00</th>
+                <th class="text-right">0.00</th>
+                <th class="text-right">0.00</th>
+                <th>&nbsp;</th>
+              </tr>
+
+              <tr>
+                <th colspan="6"
+                    class="text-right">
+                  Total USD
+                </th>
+                <th colspan="4"></th>
+
+                <th class="text-right">0.00</th>
+                <th class="text-right">0.00</th>
+
+                <th colspan="2">&nbsp;</th>
+
+              </tr>
+            </tfoot>
+          </table>
+
+          <alert type="info"
+                 *ngIf="!data.items || data.items?.length == 0">
+            No Added Items.
+          </alert>
+        </tab>
+        <tab heading="Attachment"
+             (select)="selectActiveTab(3)">
+          <div class="row">
+            <div class="col-12 text-right mb-2">
+              <button type="button"
+                      (click)="addAttachment()"
+                      class="btn btn-primary"><i class="icon-plus"></i> Add Attachment</button>
             </div>
-  
-            <div class="row">
-              <div class="col-12">
-                <table class="table table-bordered">
-                  <thead class="thead-light">
-                    <tr>
-                      <th style="width: 50px;">&nbsp;</th>
-                      <th class="text-center">File Name</th>
-                      <th class="text-center"
-                          style="width: 200px;">Type</th>
-                    </tr>
-                  </thead>
-  
-                  <tbody>
-                    <tr>
-                      <td><button class="btn btn-danger btn-sm"><i class="icon-trash"></i></button></td>
-                      <td>
-                        <a href="#">Lorem</a>
-                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora explicabo
-                          ipsum, sint ratione labore fugiat ab repudiandae optio, facere veritatis ducimus cumque dolor
-                          tempore minus pariatur eum deleniti sunt? Vel!</p>
-                      </td>
-                      <td class="text-center">application/pdf</td>
-                    </tr>
-                    <tr>
-                      <td><button class="btn btn-danger btn-sm"><i class="icon-trash"></i></button></td>
-                      <td>
-                        <a href="#">Ipsum</a>
-                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora explicabo
-                          ipsum, sint ratione labore fugiat ab repudiandae optio, facere veritatis ducimus cumque dolor
-                          tempore minus pariatur eum deleniti sunt? Vel!</p>
-                      </td>
-                      <td class="text-center">application/pdf</td>
-                    </tr>
-                    <tr>
-                      <td><button class="btn btn-danger btn-sm"><i class="icon-trash"></i></button></td>
-                      <td>
-                        <a href="#">Test</a>
-                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora explicabo
-                          ipsum, sint ratione labore fugiat ab repudiandae optio, facere veritatis ducimus cumque dolor
-                          tempore minus pariatur eum deleniti sunt? Vel!</p>
-                      </td>
-                      <td class="text-center">image/png</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </tab>
-          <tab heading="Approval Status & Commentary">
-  
-          </tab>
-          <tab heading="Execution">
-  
-          </tab>
-          <tab heading="Finishing">
-  
-          </tab>
-        </tabset>
-      </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col-12 text-right">
-            <button type="button"
-                    class="btn btn-primary">
-              Next <i class="fa fa-angle-right"></i>
-            </button>
           </div>
+
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-bordered"
+                     *ngIf="data.attachments?.length > 0">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 50px;">&nbsp;</th>
+                    <th class="text-center"
+                        style="width: 240px;">File Name</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center"
+                        style="width: 200px;">Type</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of data.attachments; let i = index;">
+                    <td>
+                      <button class="btn btn-danger btn-sm"
+                              type="button"
+                              (click)="removeAttachment(i)"><i class="icon-trash"></i></button>
+                    </td>
+                    <td>
+                      <input type="file"
+                             class="form-control"
+                             (change)="onChangeAttachment(e, item)"
+                             [(ngModel)]="item.file">
+                    </td>
+                    <td>
+                      <textarea class="form-control"
+                                [(ngModel)]="item.description"></textarea>
+                    </td>
+                    <td class="text-center">
+                      <span *ngIf="item.file">
+                        application/pdf
+                      </span>
+                    </td>
+                    <!-- <td>
+                      <a href="#">{{ item.fileName }}</a>
+                      <p class="text-muted">
+                        {{ item.description }}
+                      </p>
+                    </td>
+                    <td class="text-center">{{ item.mimeType }}</td> -->
+                  </tr>
+                </tbody>
+              </table>
+
+              <alert type="info"
+                     *ngIf="!data.attachments || data.attachments?.length == 0">
+                No Added Attachments.
+              </alert>
+            </div>
+          </div>
+        </tab>
+        <tab heading="Approval Status & Commentary"
+             (select)="selectActiveTab(4)">
+
+        </tab>
+        <tab heading="Execution"
+             (select)="selectActiveTab(5)">
+
+        </tab>
+        <tab heading="Finishing"
+             (select)="selectActiveTab(6)">
+
+        </tab>
+      </tabset>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-12 text-right">
+          <button type="button"
+                  class="btn btn-primary"
+                  (click)="nextTab()">
+            Next <i class="fa fa-angle-right"></i>
+          </button>
         </div>
       </div>
-  
+
+      <div class="row">
+        <div class="col-12">
+          <pre>{{ data | json }}</pre>
+        </div>
+      </div>
     </div>
+
   </div>
+</div>

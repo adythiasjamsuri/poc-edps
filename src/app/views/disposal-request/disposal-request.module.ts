@@ -2,17 +2,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DisposalRequestRoutingModule } from './disposal-request-routing.module';
 import { DisposalRequestEditorComponent } from './disposal-request-editor/disposal-request-editor.component';
-import { BsDatepickerModule, TabsModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, TabsModule, AlertModule } from 'ngx-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     DisposalRequestEditorComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
     TabsModule,
     DisposalRequestRoutingModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgSelectModule,
+    AlertModule.forRoot()
   ]
 })
 export class DisposalRequestModule { }
