@@ -22,7 +22,17 @@ export class DisposalRequestEditorComponent implements OnInit {
   public data: any = {
     items: [],
     attachments: [],
-    status: 'DRAFTED'
+    status: 'DRAFTED',
+    approvers: [{
+      name: 'John Mayer',
+      role: 'Singer 1',
+      status: 'Not Yet Reviewed'
+    },
+    {
+      name: 'Tom Odell',
+      role: 'Singer 2',
+      status: 'Not Yet Reviewed'
+    }]
   };
 
   public disposedItemCategories: any[] = [

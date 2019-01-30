@@ -295,16 +295,31 @@
         </tab>
         <tab heading="Approval Status & Commentary"
              (select)="selectActiveTab(4)">
-
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>Approver</th>
+                <th class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let approver of data.approvers">
+                <td>
+                  <b>{{ approver.name }}</b>&nbsp;<i>as {{ approver.role }}</i>
+                </td>
+                <td class="text-center">{{ approver.status || '-' }}</td>
+              </tr>
+            </tbody>
+          </table>
         </tab>
-        <tab heading="Execution"
+        <!-- <tab heading="Execution"
              (select)="selectActiveTab(5)">
 
         </tab>
         <tab heading="Finishing"
              (select)="selectActiveTab(6)">
 
-        </tab>
+        </tab> -->
       </tabset>
     </div>
     <div class="card-footer">
@@ -312,17 +327,25 @@
         <div class="col-12 text-right">
           <button type="button"
                   class="btn btn-primary"
-                  (click)="nextTab()">
+                  (click)="nextTab()"
+                  *ngIf="activeTab < 4">
             Next <i class="fa fa-angle-right"></i>
+          </button>
+
+          <button type="button"
+                  class="btn btn-primary"
+                  (click)="submit(data)"
+                  *ngIf="activeTab == 4">
+            Submit
           </button>
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12">
           <pre>{{ data | json }}</pre>
         </div>
-      </div>
+      </div> -->
     </div>
 
   </div>
