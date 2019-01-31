@@ -25,7 +25,7 @@ export const navItems: NavData[] = [
     children: [
       {
         name: 'With PDR',
-        url: '/disposal-requests/create',
+        url: '/disposal-requests/create-w-dpr',
         icon: 'icon-circle',
       },
       {

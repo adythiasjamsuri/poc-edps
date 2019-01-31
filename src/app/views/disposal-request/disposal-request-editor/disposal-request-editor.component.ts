@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-disposal-request-editor',
   templateUrl: './disposal-request-editor.component.html',
-  styleUrls: ['./disposal-request-editor.component.scss']
+  styleUrls: ['./disposal-request-editor.component.scss'],
 })
 export class DisposalRequestEditorComponent implements OnInit {
   @ViewChild('stepTabs') stepTabs: TabsetComponent;
@@ -158,6 +158,10 @@ export class DisposalRequestEditorComponent implements OnInit {
     catch (Exception) {
       return 0;
     }
+  }
+
+  public getItemColspan1() {
+    return this.data.disposedItemCategory == 'Inventory' ? 7 : 6;
   }
 
   constructor() {

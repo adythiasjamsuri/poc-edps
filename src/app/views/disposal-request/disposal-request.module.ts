@@ -5,10 +5,14 @@ import { DisposalRequestEditorComponent } from './disposal-request-editor/dispos
 import { BsDatepickerModule, TabsModule, AlertModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
+import { DisposalRequestViewComponent } from './disposal-request-view/disposal-request-view.component';
+import { DisposalRequestEditorWDprComponent } from './disposal-request-editor-w-dpr/disposal-request-editor-w-dpr.component';
 
 @NgModule({
   declarations: [
-    DisposalRequestEditorComponent
+    DisposalRequestEditorComponent,
+    DisposalRequestViewComponent,
+    DisposalRequestEditorWDprComponent
   ],
   imports: [
     CommonModule,

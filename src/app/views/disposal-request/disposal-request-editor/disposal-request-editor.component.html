@@ -24,7 +24,7 @@
               </div>
 
               <div class="form-group">
-                <label>Cost Center</label>
+                <label class="required">Cost Center</label>
                 <ng-select [items]="costCenters"
                            bindLabel="name"
                            placeholder="Select Cost Center"
@@ -44,7 +44,7 @@
 
             <div class="col-4">
               <div class="form-group">
-                <label>Disposed Item Category</label>
+                <label class="required">Disposed Item Category</label>
                 <ng-select [items]="disposedItemCategories"
                            bindValue="name"
                            bindLabel="name"
@@ -54,7 +54,7 @@
               </div>
 
               <div class="form-group">
-                <label>Proposed Disposal</label>
+                <label class="required">Proposed Disposal</label>
                 <ng-select [items]="proposedDisposals"
                            bindValue="name"
                            bindLabel="name"
@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group">
-                <label>Disposal Area</label>
+                <label class="required">Disposal Area</label>
                 <ng-select [items]="disposalAreas"
                            bindValue="name"
                            bindLabel="name"
@@ -100,7 +100,7 @@
               </div>
 
               <div class="form-group">
-                <label>Period</label>
+                <label class="required">Period</label>
                 <input type="text"
                        class="form-control"
                        bsDaterangepicker
@@ -134,7 +134,11 @@
               <tr>
                 <th>&nbsp;</th>
                 <th class="text-center">No.</th>
-                <th class="text-center">Item</th>
+                <th class="text-center"
+                    style="width: 150px;">Item</th>
+                <th class="text-center"
+                    style="width: 150px;"
+                    *ngIf="data.disposedItemCategory == 'Inventory'">Batch No.</th>
                 <th class="text-center">Location</th>
                 <th class="text-center">Currency</th>
                 <th class="text-center">Rate</th>
@@ -173,6 +177,12 @@
                              (change)="onChange($event, item)">
                   </ng-select>
                 </td>
+                <td class="text-center"
+                    *ngIf="data.disposedItemCategory == 'Inventory'">
+                  <input type="text"
+                         class="form-control"
+                         [(ngModel)]="item.batchNo" />
+                </td>
                 <td class="text-center">{{ item.location }}</td>
                 <td class="text-center">IDR</td>
                 <td class="text-right">14,020.00</td>
@@ -195,7 +205,7 @@
 
             <tfoot class="thead-light">
               <tr>
-                <th colspan="6"
+                <th [attr.colspan]="getItemColspan1()"
                     class="text-right">
                   Total
                 </th>
@@ -208,7 +218,7 @@
               </tr>
 
               <tr>
-                <th colspan="6"
+                <th [attr.colspan]="getItemColspan1()"
                     class="text-right">
                   Total USD
                 </th>
@@ -245,11 +255,7 @@
                 <thead class="thead-light">
                   <tr>
                     <th style="width: 50px;">&nbsp;</th>
-                    <th class="text-center"
-                        style="width: 240px;">File Name</th>
-                    <th class="text-center">Description</th>
-                    <th class="text-center"
-                        style="width: 200px;">Type</th>
+                    <th class="text-center">File</th>
                   </tr>
                 </thead>
 
@@ -261,19 +267,20 @@
                               (click)="removeAttachment(i)"><i class="icon-trash"></i></button>
                     </td>
                     <td>
-                      <input type="file"
-                             class="form-control"
-                             (change)="onChangeAttachment(e, item)"
-                             [(ngModel)]="item.file">
-                    </td>
-                    <td>
-                      <textarea class="form-control"
-                                [(ngModel)]="item.description"></textarea>
-                    </td>
-                    <td class="text-center">
-                      <span *ngIf="item.file">
-                        application/pdf
-                      </span>
+                      <div class="form-group w-50">
+                        <label>File</label>
+                        <input type="file"
+                               class="form-control"
+                               (change)="onChangeAttachment(e, item)"
+                               [(ngModel)]="item.file">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control"
+                                  [(ngModel)]="item.description"></textarea>
+                      </div>
+
                     </td>
                     <!-- <td>
                       <a href="#">{{ item.fileName }}</a>
@@ -341,11 +348,11 @@
         </div>
       </div>
 
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-12">
           <pre>{{ data | json }}</pre>
         </div>
-      </div> -->
+      </div>
     </div>
 
   </div>

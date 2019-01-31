@@ -66,10 +66,10 @@ export const routes: Routes = [
       //   path: 'charts',
       //   loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
       // },
-      // {
-      //   path: 'dashboard',
-      //   loadChildren: './views/dashboard/dashboard.module#DashboardModule'
-      // },
+      {
+        path: 'dashboard',
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+      },
       // {
       //   path: 'icons',
       //   loadChildren: './views/icons/icons.module#IconsModule'

@@ -39,6 +39,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DisposalRequestService } from './services';
 
 @NgModule({
   imports: [
@@ -62,10 +63,13 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     LoginComponent,
     RegisterComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    DisposalRequestService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
