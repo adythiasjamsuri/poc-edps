@@ -3,7 +3,6 @@ import { TabsetComponent } from 'ngx-bootstrap';
 import { DisposalRequestService } from '../../../services';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-disposal-request-editor',
@@ -20,7 +19,6 @@ export class DisposalRequestEditorComponent implements OnInit {
   ) {
 
   }
-
 
   @ViewChild('stepTabs') stepTabs: TabsetComponent;
 
@@ -196,7 +194,7 @@ export class DisposalRequestEditorComponent implements OnInit {
   public saveAsDraft(data) {
     this.disposalRequestService.create(this.transformData(data));
 
-    setTimeout(() => { this.toastr.success('Request has been saved successfully.') }, 50);
+    this.toastr.success('Request has been saved successfully.');
 
     this.router.navigate(['/disposal-requests/search-document']);
   }
@@ -205,7 +203,7 @@ export class DisposalRequestEditorComponent implements OnInit {
     data.status = 'SUBMITTED';
     this.disposalRequestService.create(this.transformData(data));
 
-    setTimeout(() => { this.toastr.success('Request has been submitted successfully.') }, 50);
+    this.toastr.success('Request has been submitted successfully.');
 
     this.router.navigate(['/disposal-requests/search-document']);
   }
