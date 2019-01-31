@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { DisposalRequestService } from '../../../services';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-disposal-request-editor',
@@ -7,6 +11,17 @@ import { TabsetComponent } from 'ngx-bootstrap';
   styleUrls: ['./disposal-request-editor.component.scss'],
 })
 export class DisposalRequestEditorComponent implements OnInit {
+
+
+  constructor(
+    private toastr: ToastrService,
+    private disposalRequestService: DisposalRequestService,
+    private router: Router
+  ) {
+
+  }
+
+
   @ViewChild('stepTabs') stepTabs: TabsetComponent;
 
   public activeTab = 1;
@@ -164,9 +179,32 @@ export class DisposalRequestEditorComponent implements OnInit {
     return this.data.disposedItemCategory == 'Inventory' ? 7 : 6;
   }
 
-  constructor() {
+  private transformData(data) {
+    data.requestorName = 'James Bay';
+    data.requestorId = '12345678';
+    data.requestNo = (new Date()).getTime();
+    data.requestDate = new Date();
+
+    data.costCenterId = data.selectedCostCenter.id;
+    data.costCenter = data.selectedCostCenter.name;
+    data.departmentName = data.selectedCostCenter.departmentName;
+
+    return data;
+  }
+
+  public saveAsDraft(data) {
+    this.toastr.success(`Request has been saved successfully.`);
+    return data;
 
   }
+
+  public submit(data) {
+    data.status = 'SUBMITTED';
+    this.disposalRequestService.create(this.transformData(data));
+
+    this.router.navigate(['/disposal-requests/search-document']);
+  }
+
 
   ngOnInit() {
   }

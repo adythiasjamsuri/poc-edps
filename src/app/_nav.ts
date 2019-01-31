@@ -47,7 +47,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Search Document',
-    url: '/theme/typography',
+    url: '/disposal-requests/search-document',
     icon: 'icon-plus'
   },
 
@@ -58,7 +58,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'My Approval',
-    url: '/theme/typography',
+    url: '/disposal-requests/approval',
     icon: 'icon-check'
   },
   {

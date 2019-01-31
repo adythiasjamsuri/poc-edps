@@ -28,7 +28,7 @@
                 <ng-select [items]="costCenters"
                            bindLabel="name"
                            placeholder="Select Cost Center"
-                           [(ngModel)]="selectedCostCenter">
+                           [(ngModel)]="data.selectedCostCenter">
                 </ng-select>
               </div>
 
@@ -38,7 +38,7 @@
                        class="form-control"
                        readonly="readonly"
                        placeholder="Based On Selected Cost Center"
-                       [value]="selectedCostCenter?.departmentName" />
+                       [value]="data.selectedCostCenter?.departmentName" />
               </div>
             </div>
 

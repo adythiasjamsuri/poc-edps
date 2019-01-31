@@ -1,0 +1,55 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered"
+             *ngIf="datas.length > 0">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 100px;"></th>
+            <th class="text-center">Request No</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Requestor</th>
+            <th class="text-center">Request Date</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of datas">
+            <td class="text-center">
+              <button class="btn btn-warning"
+                      *ngIf="data.status == 'DRAFTED'">
+                <i class="icon-pencil"></i>
+              </button>
+
+              <button class="btn btn-info"><i class="icon-eye"></i></button>
+            </td>
+            <td class="text-center">
+              {{ data.requestNo }}
+            </td>
+            <td class="text-center">
+              {{ data.title }}
+            </td>
+            <td class="text-left">
+              {{ data.requestorId }} - {{ data.requestorName }}
+            </td>
+            <td class="text-center">
+              {{ data.requestDate | date }}
+            </td>
+            <td class="text-center">
+              {{ data.disposedItemCategory }}
+            </td>
+            <td class="text-center">
+              {{ data.status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <alert type="info"
+             *ngIf="datas.length == 0">
+        No Data.
+      </alert>
+    </div>
+  </div>
+</div>
