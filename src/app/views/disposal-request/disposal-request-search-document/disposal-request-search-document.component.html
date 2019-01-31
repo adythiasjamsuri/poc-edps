@@ -17,12 +17,13 @@
         <tbody>
           <tr *ngFor="let data of datas">
             <td class="text-center">
-              <button class="btn btn-warning"
+              <button class="btn btn-sm btn-warning"
                       *ngIf="data.status == 'DRAFTED'">
                 <i class="icon-pencil"></i>
               </button>
 
-              <button class="btn btn-info"><i class="icon-eye"></i></button>
+              <button class="btn btn-sm btn-info"
+                      (click)="openDetail(data)"><i class="icon-eye"></i></button>
             </td>
             <td class="text-center">
               {{ data.requestNo }}

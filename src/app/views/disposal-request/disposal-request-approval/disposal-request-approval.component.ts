@@ -13,7 +13,7 @@ export class DisposalRequestApprovalComponent implements OnInit {
   constructor(
     private disposalRequestService: DisposalRequestService,
     private modalService: BsModalService,
-    // private toastrService: ToastrService
+    private toastrService: ToastrService
   ) { }
 
   private bsModalRef: BsModalRef;
@@ -21,17 +21,15 @@ export class DisposalRequestApprovalComponent implements OnInit {
   public datas = [];
 
   ngOnInit() {
+    setTimeout(() => { this.toastrService.success('adsf') }, 50);
+
     this.datas = this.disposalRequestService.getAll();
     this.datas = this.datas.filter(d => d.status != 'DRAFTED');
-
-    // this.toastrService.success(`asdfsadf`);
   }
 
   openDetail(data) {
-    const initialState = {
-      data: data
-    };
-    this.bsModalRef = this.modalService.show(DisposalRequestViewComponent, { initialState });
+
+    this.bsModalRef = this.modalService.show(DisposalRequestViewComponent, { class: 'modal-xl', initialState: { data: data } });
   }
 
 }

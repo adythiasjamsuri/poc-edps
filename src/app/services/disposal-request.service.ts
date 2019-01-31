@@ -18,4 +18,16 @@ export class DisposalRequestService {
 
     localStorage.setItem(this.storageKey, JSON.stringify(datas));
   }
+
+  approve(data) {
+    let datas = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+    datas.forEach(d => {
+      if (d.requestNo == data.requestNo) {
+        d.approvers[0].status = 'Approved';
+      }
+    });
+
+    localStorage.setItem(this.storageKey, JSON.stringify(datas));
+
+  }
 }

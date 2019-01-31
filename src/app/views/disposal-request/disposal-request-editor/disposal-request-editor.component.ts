@@ -40,12 +40,12 @@ export class DisposalRequestEditorComponent implements OnInit {
     status: 'DRAFTED',
     approvers: [{
       name: 'John Mayer',
-      role: 'Singer 1',
+      role: 'HR Coordinator 1',
       status: 'Not Yet Reviewed'
     },
     {
       name: 'Tom Odell',
-      role: 'Singer 2',
+      role: 'HR Coordinator 2',
       status: 'Not Yet Reviewed'
     }]
   };
@@ -185,22 +185,27 @@ export class DisposalRequestEditorComponent implements OnInit {
     data.requestNo = (new Date()).getTime();
     data.requestDate = new Date();
 
-    data.costCenterId = data.selectedCostCenter.id;
-    data.costCenter = data.selectedCostCenter.name;
-    data.departmentName = data.selectedCostCenter.departmentName;
-
+    if (data.selectedCostCenter) {
+      data.costCenterId = data.selectedCostCenter.id;
+      data.costCenter = data.selectedCostCenter.name;
+      data.departmentName = data.selectedCostCenter.departmentName;
+    }
     return data;
   }
 
   public saveAsDraft(data) {
-    this.toastr.success(`Request has been saved successfully.`);
-    return data;
+    this.disposalRequestService.create(this.transformData(data));
 
+    setTimeout(() => { this.toastr.success('Request has been saved successfully.') }, 50);
+
+    this.router.navigate(['/disposal-requests/search-document']);
   }
 
   public submit(data) {
     data.status = 'SUBMITTED';
     this.disposalRequestService.create(this.transformData(data));
+
+    setTimeout(() => { this.toastr.success('Request has been submitted successfully.') }, 50);
 
     this.router.navigate(['/disposal-requests/search-document']);
   }
