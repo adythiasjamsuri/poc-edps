@@ -21,7 +21,6 @@ export class DisposalRequestApprovalComponent implements OnInit {
   public datas = [];
 
   ngOnInit() {
-    setTimeout(() => { this.toastrService.success('adsf') }, 50);
 
     this.datas = this.disposalRequestService.getAll();
     this.datas = this.datas.filter(d => d.status != 'DRAFTED');

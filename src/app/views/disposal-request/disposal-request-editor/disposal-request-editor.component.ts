@@ -84,7 +84,7 @@ export class DisposalRequestEditorComponent implements OnInit {
       name: '5006435-0',
       description: 'AC NATIONAL SPLIT 3/4PK TYPE CS-C96KJ',
       location: 'Tuban',
-      // quantity: 1,
+      quantity: 1,
       uom: 'Pcs',
       oc: 300000,
       ad: -300000,
@@ -97,7 +97,7 @@ export class DisposalRequestEditorComponent implements OnInit {
       name: '5006435-1',
       description: 'FAN PANASONIC',
       location: 'Jakarta',
-      // quantity: 1,
+      quantity: 1,
       uom: 'Pcs',
       oc: 200000,
       ad: -200000,
@@ -194,7 +194,8 @@ export class DisposalRequestEditorComponent implements OnInit {
   public saveAsDraft(data) {
     this.disposalRequestService.create(this.transformData(data));
 
-    this.toastr.success('Request has been saved successfully.');
+    // this.toastr.success('Request has been saved successfully.');
+    alert(`Request has been saved successfully.`);
 
     this.router.navigate(['/disposal-requests/search-document']);
   }
@@ -203,7 +204,8 @@ export class DisposalRequestEditorComponent implements OnInit {
     data.status = 'SUBMITTED';
     this.disposalRequestService.create(this.transformData(data));
 
-    this.toastr.success('Request has been submitted successfully.');
+    // this.toastr.success('Request has been submitted successfully.');
+    alert('Request has been submitted successfully.');
 
     this.router.navigate(['/disposal-requests/search-document']);
   }

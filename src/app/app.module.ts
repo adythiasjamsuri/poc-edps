@@ -58,7 +58,11 @@ import { ToastrModule } from 'ngx-toastr';
     TabsModule.forRoot(),
     ChartsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot({
+      timeOut: 50000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }) // ToastrModule added
   ],
   declarations: [
     AppComponent,
