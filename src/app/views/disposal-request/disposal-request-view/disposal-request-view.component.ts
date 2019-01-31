@@ -34,8 +34,8 @@ export class DisposalRequestViewComponent implements OnInit {
   }
 
   public approve(data) {
-    alert(`Request has been approved`);
     this.disposalRequestService.approve(data);
+    alert(`Request has been approved`);
     this.bsModalRef.hide();
   }
 }
